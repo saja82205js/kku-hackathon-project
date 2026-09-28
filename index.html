@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A private, browser-only salary and job offer planner.">
+  <title>Your Salary, Actually</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <a class="skip-link" href="#planner">Skip to planner</a>
+
+  <main id="planner" class="page-shell">
+    <header class="site-header">
+      <div>
+        <p class="eyebrow">Private salary planner</p>
+        <h1>Your Salary, <span>Actually.</span></h1>
+        <p class="intro">See what a job offer is really worth each month. Everything stays in this browser.</p>
+      </div>
+      <button id="load-example" class="button button-primary" type="button">
+        <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" fill="currentColor"/></svg>
+        Load example
+      </button>
+    </header>
+
+    <p id="storage-notice" class="storage-notice" hidden></p>
+
+    <section class="hero-card card" aria-labelledby="take-home-heading">
+      <div class="hero-orb hero-orb-mint" aria-hidden="true"></div>
+      <div class="hero-orb hero-orb-purple" aria-hidden="true"></div>
+      <p class="eyebrow">Your monthly take-home</p>
+      <h2 id="take-home-heading" class="hero-amount" aria-live="polite"><span id="hero-take-home">0.00</span> <small>SAR</small></h2>
+      <p class="hero-summary"><span id="hero-gross">0.00 SAR</span> gross · <span id="hero-deduction">0.00 SAR</span> estimated deductions</p>
+      <p id="status-message" class="status-message" role="status" aria-live="polite">
+        <span class="status-dot" aria-hidden="true"></span>
+        <span id="status-text">Your estimates will update as you enter an offer.</span>
+      </p>
+    </section>
+
+    <section class="card simulator-card" aria-labelledby="simulator-heading">
+      <div class="section-heading simulator-heading">
+        <div>
+          <p class="section-kicker">Level 1</p>
+          <h2 id="simulator-heading">Interactive salary simulator</h2>
+          <p>Move the slider to see how a change in basic salary affects your take-home pay.</p>
+        </div>
+        <output id="slider-badge" class="value-badge">Basic: 0.00 SAR</output>
+      </div>
+      <label class="sr-only" for="basic-slider">Offer A basic salary slider</label>
+      <input id="basic-slider" class="salary-slider" type="range" min="0" max="30000" step="250" value="0">
+      <p class="impact-row"><span>Dynamic impact</span><strong id="delta-text">Adjust the slider to compare.</strong></p>
+    </section>
+
+    <div class="level-one-grid">
+      <section class="card" aria-labelledby="offer-a-heading">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Level 1</p>
+            <h2 id="offer-a-heading">Offer A inputs</h2>
+            <p>Enter the monthly amounts from your offer.</p>
+          </div>
+        </div>
+
+        <fieldset class="input-grid">
+          <legend class="sr-only">Offer A compensation details</legend>
+          <div class="field">
+            <label for="basic1">Basic salary <span>(SAR)</span></label>
+            <input id="basic1" data-offer="a" data-field="basic" type="number" inputmode="decimal" min="0" step="50" value="0">
+          </div>
+          <div class="field">
+            <label for="housing1">Housing allowance <span>(SAR)</span></label>
+            <input id="housing1" data-offer="a" data-field="housing" type="number" inputmode="decimal" min="0" step="50" value="0">
+          </div>
+          <div class="field">
+            <label for="transport1">Transport allowance <span>(SAR)</span></label>
+            <input id="transport1" data-offer="a" data-field="transport" type="number" inputmode="decimal" min="0" step="50" value="0">
+          </div>
+          <div class="field">
+            <label for="deduction-rate1">Deduction rate <span>(basic + housing)</span></label>
+            <div class="input-suffix"><input id="deduction-rate1" data-offer="a" data-field="deductionRate" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="0"><span aria-hidden="true">%</span></div>
+          </div>
+        </fieldset>
+
+        <div class="calculation-box" aria-label="Offer A calculation steps">
+          <div><span>1. Deduction base (basic + housing)</span><strong id="subject1">0.00 SAR</strong></div>
+          <div><span>2. Estimated deductions (<span id="deduction-rate-label1">0</span>%)</span><strong class="negative" id="deduction1">−0.00 SAR</strong></div>
+          <div><span>3. Gross salary</span><strong id="gross1">0.00 SAR</strong></div>
+          <div class="take-home-row"><span>4. Take-home pay</span><strong id="take-home1">0.00 SAR</strong></div>
+        </div>
+        <p class="disclaimer">Estimate only. Confirm deductions, benefits, and payroll rules with the employer.</p>
+      </section>
+
+      <section class="card" aria-labelledby="breakdown-heading">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">Level 1</p>
+            <h2 id="breakdown-heading">Where did my salary go?</h2>
+            <p>Your gross compensation mix and estimated deductions.</p>
+          </div>
+        </div>
+
+        <div class="breakdown-list" aria-label="Offer A compensation breakdown">
+          <div class="breakdown-item">
+            <div class="breakdown-label"><span><i class="marker marker-basic" aria-hidden="true"></i>Basic salary</span><strong id="bar-basic-value">0.0%</strong></div>
+            <div class="meter-track"><div id="bar-basic" class="meter-fill meter-basic" role="meter" aria-label="Basic salary share of gross salary" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div></div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-label"><span><i class="marker marker-housing" aria-hidden="true"></i>Housing allowance</span><strong id="bar-housing-value">0.0%</strong></div>
+            <div class="meter-track"><div id="bar-housing" class="meter-fill meter-housing" role="meter" aria-label="Housing allowance share of gross salary" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div></div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-label"><span><i class="marker marker-transport" aria-hidden="true"></i>Transport allowance</span><strong id="bar-transport-value">0.0%</strong></div>
+            <div class="meter-track"><div id="bar-transport" class="meter-fill meter-transport" role="meter" aria-label="Transport allowance share of gross salary" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div></div>
+          </div>
+          <div class="breakdown-item">
+            <div class="breakdown-label"><span><i class="marker marker-deduction" aria-hidden="true"></i>Estimated deductions</span><strong class="negative" id="bar-deduction-value">0.0%</strong></div>
+            <div class="meter-track"><div id="bar-deduction" class="meter-fill meter-deduction" role="meter" aria-label="Estimated deductions share of gross salary" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div></div>
+          </div>
+        </div>
+
+        <div class="retention-card"><span>Net retention rate</span><strong id="retention-rate">0.0% of gross retained</strong></div>
+      </section>
+    </div>
+
+    <section class="card" aria-labelledby="budget-heading">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Level 2</p>
+          <h2 id="budget-heading">Bills &amp; savings planner</h2>
+          <p>See how much of your estimated take-home pay remains after regular bills.</p>
+        </div>
+      </div>
+      <fieldset class="input-grid budget-inputs">
+        <legend class="sr-only">Budget details</legend>
+        <div class="field">
+          <label for="bills">Monthly bills <span>(SAR)</span></label>
+          <input id="bills" data-budget-field="bills" type="number" inputmode="decimal" min="0" step="50" value="0">
+        </div>
+        <div class="field">
+          <label for="savings-goal">Savings goal <span>(SAR)</span></label>
+          <input id="savings-goal" data-budget-field="savingsGoal" type="number" inputmode="decimal" min="0" step="100" value="0">
+        </div>
+      </fieldset>
+      <div class="result-grid">
+        <article class="mini-result"><span>Money left after bills</span><strong id="remaining-money">0.00 SAR</strong></article>
+        <article class="mini-result mini-result-purple"><span>Timeline to savings goal</span><strong id="savings-timeline">No goal set</strong></article>
+      </div>
+    </section>
+
+    <section class="card comparison-card" aria-labelledby="comparison-heading">
+      <div class="section-heading">
+        <div>
+          <p class="section-kicker">Level 3</p>
+          <h2 id="comparison-heading">Job offer comparison</h2>
+          <p>Compare the same estimated monthly calculation for two offers.</p>
+        </div>
+      </div>
+
+      <div class="comparison-grid">
+        <article class="offer-summary offer-a-summary" aria-labelledby="offer-a-summary-heading">
+          <div class="offer-card-heading"><span id="offer-a-summary-heading">Offer A</span><span class="tag tag-primary">Primary</span></div>
+          <p class="compare-number" id="compare-take-home-a">0.00 SAR</p>
+          <p>Monthly take-home</p>
+          <dl class="comparison-details">
+            <div><dt>Gross</dt><dd id="compare-gross-a">0.00 SAR</dd></div>
+            <div><dt>Retention</dt><dd id="compare-retention-a">0.0%</dd></div>
+          </dl>
+        </article>
+
+        <article class="offer-form" aria-labelledby="offer-b-heading">
+          <div class="offer-card-heading"><span id="offer-b-heading">Offer B</span><span class="tag tag-secondary">Secondary</span></div>
+          <fieldset class="compact-input-grid">
+            <legend class="sr-only">Offer B compensation details</legend>
+            <div class="field"><label for="basic2">Basic <span>(SAR)</span></label><input id="basic2" data-offer="b" data-field="basic" type="number" inputmode="decimal" min="0" step="50" value="0"></div>
+            <div class="field"><label for="housing2">Housing <span>(SAR)</span></label><input id="housing2" data-offer="b" data-field="housing" type="number" inputmode="decimal" min="0" step="50" value="0"></div>
+            <div class="field"><label for="transport2">Transport <span>(SAR)</span></label><input id="transport2" data-offer="b" data-field="transport" type="number" inputmode="decimal" min="0" step="50" value="0"></div>
+            <div class="field"><label for="deduction-rate2">Deduction <span>(%)</span></label><div class="input-suffix"><input id="deduction-rate2" data-offer="b" data-field="deductionRate" type="number" inputmode="decimal" min="0" max="100" step="0.01" value="0"><span aria-hidden="true">%</span></div></div>
+          </fieldset>
+          <div class="offer-b-result"><span>Offer B take-home</span><strong id="compare-take-home-b">0.00 SAR</strong></div>
+        </article>
+      </div>
+
+      <div id="comparison-verdict" class="comparison-verdict" aria-live="polite">Enter Offer B to compare it with Offer A.</div>
+    </section>
+
+    <footer class="page-footer">Calculations are monthly estimates in Saudi riyals (SAR). Your entries are stored only in this browser.</footer>
+  </main>
+
+  <script src="sample-data/data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
