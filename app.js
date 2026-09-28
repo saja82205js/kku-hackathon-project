@@ -3,7 +3,7 @@
 
   const STORAGE_KEY = 'salary-job-offer-planner:v1';
   const EXAMPLE = window.SALARY_PLANNER_EXAMPLE;
-  const currencyFormatter = new Intl.NumberFormat('en-SA', {
+  const currencyFormatter = new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   });
@@ -60,7 +60,7 @@
   }
 
   function formatRate(rate) {
-    return Number(rate).toLocaleString('en-SA', { maximumFractionDigits: 2 });
+    return Number(rate).toLocaleString('en-US', { maximumFractionDigits: 2 });
   }
 
   function calculateOffer(offer) {

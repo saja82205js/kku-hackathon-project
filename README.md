@@ -29,7 +29,7 @@ The page starts with fictional built-in sample values from `sample-data/data.js`
 
 ## Calculation assumptions
 
-All values are monthly and use Saudi riyals (SAR).
+All values are monthly and use Saudi riyals (SAR). Displayed figures use English (United States) / Western digit formatting, such as `8,596.88 SAR`.
 
 - **Deduction base** = basic salary + housing allowance
 - **Estimated deductions** = deduction base × deduction percentage
@@ -38,7 +38,7 @@ All values are monthly and use Saudi riyals (SAR).
 - **Savings timeline** = savings goal ÷ money left after bills, rounded up to full months
 - **Savings capacity** = money left after bills ÷ estimated take-home pay. The meter shows 0–100%; if bills exceed income, the app reports the SAR shortfall instead of displaying a negative meter.
 
-The app uses a playful cream, coral, purple, and yellow design with visible focus states, responsive layouts, reduced-motion support, and a forced-colors fallback. Confirm actual deductions, benefits, payroll rules, and offer terms with the employer.
+The app uses a self-contained cream, coral, purple, and yellow neo-brutalist design with no external fonts or assets. It includes visible focus states, responsive layouts, reduced-motion support, a forced-colors fallback, and an accessible savings-capacity meter. Confirm actual deductions, benefits, payroll rules, and offer terms with the employer.
 
 Built with Claude Code during the KKU Claude Code hackathon
 Started on 2026-09-28
