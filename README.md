@@ -6,7 +6,7 @@ A private, browser-only tool that helps you understand a job offer in Saudi riya
 
 - **Level 1 — Salary estimate:** calculates gross pay, estimated deductions, take-home pay, retention rate, and a compensation breakdown from basic salary, housing, transport, and a deduction rate.
 - **Interactive simulator:** move the basic-salary slider to see the estimated change in take-home pay.
-- **Level 2 — Savings planner:** enter monthly bills and a savings target to see money remaining and the estimated number of months to reach the goal.
+- **Level 2 — Savings planner:** enter monthly bills and a savings target to see money remaining, your savings capacity as a share of take-home pay, and the estimated number of months to reach the goal.
 - **Level 3 — Offer comparison:** compare Offer A and Offer B, including their estimated monthly and annual take-home difference.
 
 ## Who it is for
@@ -36,8 +36,9 @@ All values are monthly and use Saudi riyals (SAR).
 - **Gross salary** = basic salary + housing allowance + transport allowance
 - **Estimated take-home** = gross salary − estimated deductions
 - **Savings timeline** = savings goal ÷ money left after bills, rounded up to full months
+- **Savings capacity** = money left after bills ÷ estimated take-home pay. The meter shows 0–100%; if bills exceed income, the app reports the SAR shortfall instead of displaying a negative meter.
 
-Confirm actual deductions, benefits, payroll rules, and offer terms with the employer.
+The app uses a playful cream, coral, purple, and yellow design with visible focus states, responsive layouts, reduced-motion support, and a forced-colors fallback. Confirm actual deductions, benefits, payroll rules, and offer terms with the employer.
 
 Built with Claude Code during the KKU Claude Code hackathon
 Started on 2026-09-28

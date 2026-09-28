@@ -29,6 +29,10 @@
     takeHomeOne: document.getElementById('take-home1'),
     remainingMoney: document.getElementById('remaining-money'),
     savingsTimeline: document.getElementById('savings-timeline'),
+    savingsCapacity: document.getElementById('savings-capacity'),
+    savingsCapacityValue: document.getElementById('savings-capacity-value'),
+    savingsCapacityMeter: document.getElementById('savings-capacity-meter'),
+    savingsCapacityDescription: document.getElementById('savings-capacity-description'),
     compareTakeHomeA: document.getElementById('compare-take-home-a'),
     compareGrossA: document.getElementById('compare-gross-a'),
     compareRetentionA: document.getElementById('compare-retention-a'),
@@ -149,6 +153,31 @@
       const months = Math.ceil(savingsGoal / remaining);
       setText(elements.savingsTimeline, `${months} ${months === 1 ? 'month' : 'months'}`);
     }
+
+    let capacity = 0;
+    let stateName = 'empty';
+    let description = 'Enter an offer to see how much of your take-home remains after bills.';
+
+    if (takeHome > 0 && remaining > 0) {
+      capacity = Math.min(100, remaining / takeHome * 100);
+      stateName = 'positive';
+      description = `${capacity.toFixed(1)}% of your take-home remains: ${formatSAR(remaining)} for savings or other priorities.`;
+    } else if (takeHome > 0 && remaining === 0) {
+      stateName = 'zero';
+      description = 'Your bills use all of your estimated take-home, leaving 0.0% for savings.';
+    } else if (takeHome > 0 && remaining < 0) {
+      stateName = 'over-budget';
+      const shortfall = Math.abs(remaining);
+      const shortfallRate = shortfall / takeHome * 100;
+      description = `Your bills are ${formatSAR(shortfall)} over your estimated take-home (${shortfallRate.toFixed(1)}% shortfall).`;
+    }
+
+    elements.savingsCapacity.dataset.state = stateName;
+    setText(elements.savingsCapacityValue, `${capacity.toFixed(1)}%`);
+    setText(elements.savingsCapacityDescription, description);
+    elements.savingsCapacityMeter.style.width = `${capacity}%`;
+    elements.savingsCapacityMeter.setAttribute('aria-valuenow', capacity.toFixed(1));
+    elements.savingsCapacityMeter.setAttribute('aria-valuetext', description);
   }
 
   function renderComparison(offerA, offerB) {

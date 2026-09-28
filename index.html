@@ -14,8 +14,8 @@
     <header class="site-header">
       <div>
         <p class="eyebrow">Private salary planner</p>
-        <h1>Your Salary, <span>Actually.</span></h1>
-        <p class="intro">See what a job offer is really worth each month. Everything stays in this browser.</p>
+        <h1>So… how much are you <span>really</span> making?</h1>
+        <p class="intro">Enter your offer. We’ll do the monthly math — and keep every value in this browser.</p>
       </div>
       <button id="load-example" class="button button-primary" type="button">
         <svg aria-hidden="true" viewBox="0 0 24 24" width="18" height="18"><path d="M13 2 3 14h7l-1 8 10-12h-7l1-8Z" fill="currentColor"/></svg>
@@ -26,14 +26,12 @@
     <p id="storage-notice" class="storage-notice" hidden></p>
 
     <section class="hero-card card" aria-labelledby="take-home-heading">
-      <div class="hero-orb hero-orb-mint" aria-hidden="true"></div>
-      <div class="hero-orb hero-orb-purple" aria-hidden="true"></div>
-      <p class="eyebrow">Your monthly take-home</p>
+      <p class="hero-kicker">Your take-home</p>
       <h2 id="take-home-heading" class="hero-amount" aria-live="polite"><span id="hero-take-home">0.00</span> <small>SAR</small></h2>
-      <p class="hero-summary"><span id="hero-gross">0.00 SAR</span> gross · <span id="hero-deduction">0.00 SAR</span> estimated deductions</p>
+      <p class="hero-summary">That’s what actually lands in your pocket. <span id="hero-gross">0.00 SAR</span> gross · <span id="hero-deduction">0.00 SAR</span></p>
       <p id="status-message" class="status-message" role="status" aria-live="polite">
         <span class="status-dot" aria-hidden="true"></span>
-        <span id="status-text">Your estimates will update as you enter an offer.</span>
+        <span id="status-text">Adjust the numbers to test your offer.</span>
       </p>
     </section>
 
@@ -41,8 +39,8 @@
       <div class="section-heading simulator-heading">
         <div>
           <p class="section-kicker">Level 1</p>
-          <h2 id="simulator-heading">Interactive salary simulator</h2>
-          <p>Move the slider to see how a change in basic salary affects your take-home pay.</p>
+          <h2 id="simulator-heading">Play with the numbers</h2>
+          <p>Drag the basic-salary slider and watch your take-home react instantly.</p>
         </div>
         <output id="slider-badge" class="value-badge">Basic: 0.00 SAR</output>
       </div>
@@ -56,8 +54,8 @@
         <div class="section-heading">
           <div>
             <p class="section-kicker">Level 1</p>
-            <h2 id="offer-a-heading">Offer A inputs</h2>
-            <p>Enter the monthly amounts from your offer.</p>
+            <h2 id="offer-a-heading">Build your offer</h2>
+            <p>Add the monthly amounts from Offer A.</p>
           </div>
         </div>
 
@@ -94,8 +92,8 @@
         <div class="section-heading">
           <div>
             <p class="section-kicker">Level 1</p>
-            <h2 id="breakdown-heading">Where did my salary go?</h2>
-            <p>Your gross compensation mix and estimated deductions.</p>
+            <h2 id="breakdown-heading">Where your money goes</h2>
+            <p>See your gross compensation mix and estimated deductions.</p>
           </div>
         </div>
 
@@ -126,8 +124,8 @@
       <div class="section-heading">
         <div>
           <p class="section-kicker">Level 2</p>
-          <h2 id="budget-heading">Bills &amp; savings planner</h2>
-          <p>See how much of your estimated take-home pay remains after regular bills.</p>
+          <h2 id="budget-heading">Bills first. Goals next.</h2>
+          <p>Check how much of your estimated take-home survives your regular bills.</p>
         </div>
       </div>
       <fieldset class="input-grid budget-inputs">
@@ -143,7 +141,12 @@
       </fieldset>
       <div class="result-grid">
         <article class="mini-result"><span>Money left after bills</span><strong id="remaining-money">0.00 SAR</strong></article>
-        <article class="mini-result mini-result-purple"><span>Timeline to savings goal</span><strong id="savings-timeline">No goal set</strong></article>
+        <article class="mini-result mini-result-purple"><span>Time to reach your goal</span><strong id="savings-timeline">No goal set</strong></article>
+      </div>
+      <div id="savings-capacity" class="savings-capacity" data-state="empty">
+        <div class="capacity-heading"><span>Savings capacity</span><strong id="savings-capacity-value">0.0%</strong></div>
+        <div class="capacity-track"><div id="savings-capacity-meter" class="capacity-fill" role="meter" aria-label="Savings capacity after monthly bills" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="Enter an offer to calculate savings capacity."></div></div>
+        <p id="savings-capacity-description">Enter an offer to see how much of your take-home remains after bills.</p>
       </div>
     </section>
 
@@ -151,8 +154,8 @@
       <div class="section-heading">
         <div>
           <p class="section-kicker">Level 3</p>
-          <h2 id="comparison-heading">Job offer comparison</h2>
-          <p>Compare the same estimated monthly calculation for two offers.</p>
+          <h2 id="comparison-heading">Offer face-off</h2>
+          <p>Put two offers side by side and see which one gives you more.</p>
         </div>
       </div>
 
@@ -183,7 +186,7 @@
       <div id="comparison-verdict" class="comparison-verdict" aria-live="polite">Enter Offer B to compare it with Offer A.</div>
     </section>
 
-    <footer class="page-footer">Calculations are monthly estimates in Saudi riyals (SAR). Your entries are stored only in this browser.</footer>
+    <footer class="page-footer">Monthly SAR estimates only. Your entries stay in this browser — nowhere else.</footer>
   </main>
 
   <script src="sample-data/data.js"></script>
