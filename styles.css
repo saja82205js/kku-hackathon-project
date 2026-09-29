@@ -35,6 +35,7 @@ body {
 }
 
 button, input { font: inherit; }
+input, output, .hero-amount, .hero-summary, .status-message, .value-badge, .impact-row, .calculation-box, .breakdown-label, .retention-card, .mini-result, .savings-capacity, .compare-number, .comparison-details, .offer-b-result, .comparison-verdict { font-variant-numeric: lining-nums tabular-nums; }
 button { cursor: pointer; touch-action: manipulation; }
 button, input, .meter-fill, .capacity-fill { transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition), background-color var(--transition), color var(--transition); }
 button:focus-visible, input:focus-visible, .skip-link:focus-visible { outline: 3px solid var(--paper); box-shadow: 0 0 0 6px var(--focus); }

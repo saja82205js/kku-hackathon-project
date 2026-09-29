@@ -44,13 +44,20 @@
     return JSON.parse(JSON.stringify(data));
   }
 
+  function normalizeDigits(value) {
+    return String(value).replace(/[٠-٩۰-۹]/g, (digit) => {
+      const code = digit.charCodeAt(0);
+      return String(code >= 0x06F0 ? code - 0x06F0 : code - 0x0660);
+    }).replace(/[٫]/g, '.').replace(/[٬]/g, ',');
+  }
+
   function safeAmount(value) {
-    const parsed = Number.parseFloat(value);
+    const parsed = Number.parseFloat(normalizeDigits(value));
     return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
   }
 
   function safeRate(value) {
-    const parsed = Number.parseFloat(value);
+    const parsed = Number.parseFloat(normalizeDigits(value));
     if (!Number.isFinite(parsed)) return 0;
     return Math.min(100, Math.max(0, parsed));
   }
